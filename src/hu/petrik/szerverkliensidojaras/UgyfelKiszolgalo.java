@@ -9,11 +9,13 @@ public class UgyfelKiszolgalo implements Runnable {
     private Socket kapcsolat;
     private HashMap<String, Idojaras> elorejelzesek;
     private HashMap<String, Idojaras> legalacsonyabbMaiNulla;
+    private HashMap<String, Idojaras> holnapNapsutes;
 
     public UgyfelKiszolgalo(Socket kapcsolat) {
         this.kapcsolat = kapcsolat;
         elorejelzesek = new HashMap<>();
         legalacsonyabbMaiNulla = new HashMap<>();
+        holnapNapsutes = new HashMap<>();
     }
 
     @Override
@@ -35,7 +37,7 @@ public class UgyfelKiszolgalo implements Runnable {
                         break;
                     case 2: ugyfelnek.writeUTF(kiir2());
                         break;
-                    case 3:
+                    case 3: ugyfelnek.writeUTF(kiir3());
                         break;
                     case 4:
                         break;
@@ -68,6 +70,10 @@ public class UgyfelKiszolgalo implements Runnable {
                     legalacsonyabbMaiNulla.put(megye, i);
                 }
 
+                if (i.getHolnapi().getSzovegesElorejelzes() == "Sunny") {
+                    holnapNapsutes.put(megye, i);
+                }
+
                 sor = br.readLine();
             }
 
@@ -90,6 +96,14 @@ public class UgyfelKiszolgalo implements Runnable {
     public String kiir2() {
         String s = "";
         for (Map.Entry<String, Idojaras> entry: legalacsonyabbMaiNulla.entrySet()) {
+            s += entry.getValue() + "\n";
+        }
+        return s;
+    }
+
+    public String kiir3() {
+        String s = "";
+        for (Map.Entry<String, Idojaras> entry: holnapNapsutes.entrySet()) {
             s += entry.getValue() + "\n";
         }
         return s;
