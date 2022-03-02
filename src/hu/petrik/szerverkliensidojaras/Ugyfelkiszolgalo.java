@@ -23,13 +23,15 @@ public class Ugyfelkiszolgalo implements Runnable {
         try {
             BufferedReader br = new BufferedReader(new FileReader("weather.txt"));
 
+            br.readLine();
             String sor = br.readLine();
+
             while (sor != null) {
                 Idojaras i = new Idojaras(sor);
                 String megye = i.getMegye();
                 elorejelzesek.put(megye, i);
 
-                br.readLine();
+                sor = br.readLine();
             }
 
             for (Map.Entry<String, Idojaras> entry: elorejelzesek.entrySet()) {

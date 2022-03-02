@@ -7,9 +7,9 @@ public class Elorejelzses {
 
     public Elorejelzses(String elo, String minmax) {
         this.szovegesElorejelzes = elo;
-        String st[] = minmax.split("/");
-        this.min = Integer.parseInt(st[0]);
-        this.max = Integer.parseInt(st[1]);
+        String[] st = minmax.split("/");
+        this.min = Integer.parseInt(st[0].trim());
+        this.max = Integer.parseInt(st[1].trim());
     }
 
     public String getSzovegesElorejelzes() {
