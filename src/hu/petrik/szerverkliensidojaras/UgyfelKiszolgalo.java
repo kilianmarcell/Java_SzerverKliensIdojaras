@@ -8,14 +8,22 @@ import java.util.Map;
 public class UgyfelKiszolgalo implements Runnable {
     private Socket kapcsolat;
     private HashMap<String, Idojaras> elorejelzesek;
+
     private HashMap<String, Idojaras> legalacsonyabbMaiNulla;
     private HashMap<String, Idojaras> holnapNapsutes;
+    private HashMap<String, Idojaras> maEsos;
+    private HashMap<String, Idojaras> holnapSzeles;
+    private HashMap<String, Idojaras> maHolnapUgyanOlyan;
 
     public UgyfelKiszolgalo(Socket kapcsolat) {
         this.kapcsolat = kapcsolat;
         elorejelzesek = new HashMap<>();
+
         legalacsonyabbMaiNulla = new HashMap<>();
         holnapNapsutes = new HashMap<>();
+        maEsos = new HashMap<>();
+        holnapSzeles = new HashMap<>();
+        maHolnapUgyanOlyan = new HashMap<>();
     }
 
     @Override
@@ -33,17 +41,17 @@ public class UgyfelKiszolgalo implements Runnable {
                 switch (menu){
                     case 0: ugyfelnek.writeUTF("Kilépett!");
                         break;
-                    case 1: ugyfelnek.writeUTF(kiir1());
+                    case 1: ugyfelnek.writeUTF(kiir());
                         break;
-                    case 2: ugyfelnek.writeUTF(kiir2());
+                    case 2: ugyfelnek.writeUTF(kiir1());
                         break;
-                    case 3: ugyfelnek.writeUTF(kiir3());
+                    case 3: ugyfelnek.writeUTF(kiir2());
                         break;
-                    case 4:
+                    case 4: ugyfelnek.writeUTF(kiir3());
                         break;
-                    case 5:
+                    case 5: ugyfelnek.writeUTF(kiir4());
                         break;
-                    case 6:
+                    case 6: ugyfelnek.writeUTF(kiir5());
                         break;
                 }
 
@@ -74,6 +82,18 @@ public class UgyfelKiszolgalo implements Runnable {
                     holnapNapsutes.put(megye, i);
                 }
 
+                if (i.getMai().getSzovegesElorejelzes().equals("Rain")) {
+                    maEsos.put(megye, i);
+                }
+
+                if (i.getHolnapi().getSzovegesElorejelzes().equals("Windy")) {
+                    holnapSzeles.put(megye, i);
+                }
+
+                if (i.getMai().getSzovegesElorejelzes().equals(i.getHolnapi().getSzovegesElorejelzes())) {
+                    maHolnapUgyanOlyan.put(megye, i);
+                }
+
                 sor = br.readLine();
             }
 
@@ -85,28 +105,63 @@ public class UgyfelKiszolgalo implements Runnable {
         }
     }
 
-    public String kiir1() {
+    public String kiir() {
         String s = "";
+
         for (Map.Entry<String, Idojaras> entry: elorejelzesek.entrySet()) {
             s += entry.getValue() + "\n";
         }
+
+        return s;
+    }
+
+    public String kiir1() {
+        String s = "";
+
+        for (Map.Entry<String, Idojaras> entry: legalacsonyabbMaiNulla.entrySet()) {
+            s += entry.getValue() + "\n";
+        }
+
         return s;
     }
 
     public String kiir2() {
         String s = "";
-        for (Map.Entry<String, Idojaras> entry: legalacsonyabbMaiNulla.entrySet()) {
+
+        for (Map.Entry<String, Idojaras> entry: holnapNapsutes.entrySet()) {
             s += entry.getValue() + "\n";
         }
+
         return s;
     }
 
     public String kiir3() {
         String s = "";
-        for (Map.Entry<String, Idojaras> entry: holnapNapsutes.entrySet()) {
+
+        for (Map.Entry<String, Idojaras> entry: maEsos.entrySet()) {
             s += entry.getValue() + "\n";
         }
-        s += "" + holnapNapsutes.entrySet().size();
+
+        return s;
+    }
+
+    public String kiir4() {
+        String s = "";
+
+        for (Map.Entry<String, Idojaras> entry: holnapSzeles.entrySet()) {
+            s += entry.getValue() + "\n";
+        }
+
+        return s;
+    }
+
+    public String kiir5() {
+        String s = "";
+
+        for (Map.Entry<String, Idojaras> entry: maHolnapUgyanOlyan.entrySet()) {
+            s += entry.getValue() + "\n";
+        }
+
         return s;
     }
 }

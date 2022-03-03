@@ -22,11 +22,10 @@ public class Kliens {
                         "\t0. Kilépés\n" +
                         "\t1. Listázás\n" +
                         "\t2. Ma legalacsonyabb hőmérséklet 0°\n" +
-                        "\t3. Napsütéses\n" +
-                        "\t4. Esős\n" +
-                        "\t5. Szeles\n" +
-                        "\t6. Borús\n"
-
+                        "\t3. Holnap napsütéses\n" +
+                        "\t4. Ma esős\n" +
+                        "\t5. Holnap szeles\n" +
+                        "\t6. Ma és holnap ugyan olyan az idő\n"
                 );
 
                 menu = s.nextInt();
