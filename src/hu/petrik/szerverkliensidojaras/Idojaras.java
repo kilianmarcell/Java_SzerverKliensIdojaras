@@ -46,6 +46,6 @@ public class Idojaras {
     @Override
     public String toString() {
         return megye + ":\n\tMai: " + mai +
-                "\n\tHolnapi:" + holnapi;
+                "\n\tHolnapi: " + holnapi;
     }
 }

@@ -70,7 +70,7 @@ public class UgyfelKiszolgalo implements Runnable {
                     legalacsonyabbMaiNulla.put(megye, i);
                 }
 
-                if (i.getHolnapi().getSzovegesElorejelzes() == "Sunny") {
+                if (i.getHolnapi().getSzovegesElorejelzes().equals("Sunny")) {
                     holnapNapsutes.put(megye, i);
                 }
 
@@ -106,6 +106,7 @@ public class UgyfelKiszolgalo implements Runnable {
         for (Map.Entry<String, Idojaras> entry: holnapNapsutes.entrySet()) {
             s += entry.getValue() + "\n";
         }
+        s += "" + holnapNapsutes.entrySet().size();
         return s;
     }
 }
